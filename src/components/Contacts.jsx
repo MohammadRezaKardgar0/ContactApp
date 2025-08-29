@@ -1,6 +1,8 @@
 import { useState } from "react";
+import ContactsList from "./ContactsList";
 
 function Contacts() {
+  const [contacts, setContacts] = useState([]);
   const [contact, setContact] = useState({
     name: "",
     lastName: "",
@@ -14,9 +16,16 @@ function Contacts() {
     setContact((contact) => ({ ...contact, [name]: value }));
   };
 
-  const addHandler=()=>{
-console.log(contact)
-  }
+  const addHandler = () => {
+    setContacts((contacts) => [...contacts, contact]);
+    setContact({
+      name: "",
+      lastName: "",
+      email: "",
+      phone: "",
+    });
+    console.log(contact);
+  };
 
   return (
     <div>
@@ -51,6 +60,7 @@ console.log(contact)
         />
         <button onClick={addHandler}>Add Contact</button>
       </div>
+      <ContactsList contacts={contacts}/>
     </div>
   );
 }
