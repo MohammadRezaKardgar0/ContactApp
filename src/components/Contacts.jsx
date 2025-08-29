@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ContactsList from "./ContactsList";
-import inputs from "../constants/input";
+import inputs from "../Constants/inputs";
 import { v4 } from "uuid";
 
 function Contacts() {
@@ -39,9 +39,11 @@ function Contacts() {
       email: "",
       phone: "",
     });
-    console.log(contact);
   };
-
+  const deleteHandler = (id) => {
+    const newContacts = contacts.filter((contact) => contact.id !== id);
+    setContacts(newContacts);
+  };
   return (
     <div>
       <div>
@@ -59,7 +61,7 @@ function Contacts() {
         <button onClick={addHandler}>Add Contact</button>
       </div>
       <div>{alert && <p>{alert}</p>}</div>
-      <ContactsList contacts={contacts} />
+      <ContactsList contacts={contacts} deleteHandler={deleteHandler} />
     </div>
   );
 }
